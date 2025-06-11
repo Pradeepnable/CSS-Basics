@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastering CSS - A Comprehensive Guide</title>
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4cc9f0;
+            --warning-color: #f72585;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            color: var(--secondary-color);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            font-size: 2rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        /* Layout */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        nav {
+            background-color: var(--dark-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 1rem;
+        }
+
+        nav li {
+            margin: 0 1rem;
+        }
+
+        nav a {
+            color: white;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: inherit;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+        }
+
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-1 { margin-top: 1rem; }
+        .mt-2 { margin-top: 2rem; }
+        .mb-1 { margin-bottom: 1rem; }
+        .mb-2 { margin-bottom: 2rem; }
+        .py-1 { padding-top: 1rem; padding-bottom: 1rem; }
+        .py-2 { padding-top: 2rem; padding-bottom: 2rem; }
+
+        .bg-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .bg-secondary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .rounded {
+            border-radius: var(--border-radius);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+        /* Pseudo-elements */
+        .highlight::before {
+            content: "→ ";
+            color: var(--warning-color);
+        }
+
+        /* Transforms */
+        .transform-example {
+            width: 100px;
+            height: 100px;
+            background-color: var(--accent-color);
+            margin: 1rem auto;
+            transition: var(--transition);
+        }
+
+        .transform-example:hover {
+            transform: rotate(45deg) scale(1.1);
+        }
+
+        /* Flexbox Examples */
+        .flex-example {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: #eee;
+            border-radius: var(--border-radius);
+            margin: 1rem 0;
+        }
+
+        .flex-item {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            flex: 1;
+            text-align: center;
+        }
+
+        /* Grid Examples */
+        .grid-example {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            padding: 1rem;
+            background-color: #eee;
+            border-radius: var(--border-radius);
+            margin: 1rem 0;
+        }
+
+        .grid-item {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav li {
+                margin: 0.5rem 0;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* CSS Selectors */
+        .selectors-example p:first-child {
+            font-weight: bold;
+        }
+
+        .selectors-example p:nth-child(2n) {
+            color: var(--primary-color);
+        }
+
+        .selectors-example p:last-child {
+            font-style: italic;
+        }
+
+        /* Position Examples */
+        .position-example {
+            position: relative;
+            height: 200px;
+            background-color: #f0f0f0;
+            border-radius: var(--border-radius);
+            margin: 2rem 0;
+        }
+
+        .position-box {
+            width: 80px;
+            height: 80px;
+            background-color: var(--warning-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--border-radius);
+        }
+
+        .static { position: static; }
+        .relative { position: relative; top: 20px; left: 20px; }
+        .absolute { position: absolute; bottom: 20px; right: 20px; }
+        .fixed { position: fixed; bottom: 20px; right: 20px; }
+        .sticky { position: sticky; top: 20px; }
+
+        /* Custom Properties */
+        .custom-prop {
+            --box-size: 100px;
+            width: var(--box-size);
+            height: var(--box-size);
+            background-color: var(--success-color);
+            margin: 1rem auto;
+        }
+
+        /* Filters */
+        .filter-example {
+            filter: grayscale(50%) blur(1px);
+            transition: var(--transition);
+        }
+
+        .filter-example:hover {
+            filter: none;
+        }
+
+        /* Clip-path */
+        .clip-example {
+            width: 200px;
+            height: 200px;
+            background-color: var(--accent-color);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            margin: 1rem auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        /* Dark mode */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #121212;
+                color: #f0f0f0;
+            }
+
+            .card {
+                background-color: #1e1e1e;
+                color: #f0f0f0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="animate">
+        <div class="container">
+            <h1>Mastering CSS</h1>
+            <p class="mt-1">A comprehensive guide to modern CSS techniques</p>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#selectors">Selectors</a></li>
+            <li><a href="#layout">Layout</a></li>
+            <li><a href="#effects">Effects</a></li>
+            <li><a href="#animation">Animation</a></li>
+            <li><a href="#responsive">Responsive</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <section id="selectors" class="mb-2 animate delay-1">
+            <h2>CSS Selectors</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Basic Selectors</h3>
+                    <p>Element, class, and ID selectors</p>
+                    <div class="selectors-example mt-1">
+                        <p>First paragraph (first-child)</p>
+                        <p>Second paragraph (nth-child)</p>
+                        <p>Third paragraph (last-child)</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Pseudo-classes</h3>
+                    <p>:hover, :focus, :active states</p>
+                    <button class="btn mt-1">Hover Me</button>
+                    <div class="mt-1">
+                        <label for="input-example">Focus example:</label>
+                        <input type="text" id="input-example" placeholder="Click here">
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Pseudo-elements</h3>
+                    <p>::before and ::after</p>
+                    <p class="highlight mt-1">This text has a pseudo-element before it</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="layout" class="mb-2 animate delay-2">
+            <h2>Layout Techniques</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Flexbox</h3>
+                    <p>One-dimensional layout system</p>
+                    <div class="flex-example mt-1">
+                        <div class="flex-item">Item 1</div>
+                        <div class="flex-item">Item 2</div>
+                        <div class="flex-item">Item 3</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>CSS Grid</h3>
+                    <p>Two-dimensional layout system</p>
+                    <div class="grid-example mt-1">
+                        <div class="grid-item">1</div>
+                        <div class="grid-item">2</div>
+                        <div class="grid-item">3</div>
+                        <div class="grid-item">4</div>
+                        <div class="grid-item">5</div>
+                        <div class="grid-item">6</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Positioning</h3>
+                    <p>Static, relative, absolute, fixed, sticky</p>
+                    <div class="position-example mt-1">
+                        <div class="position-box static">Static</div>
+                        <div class="position-box relative">Relative</div>
+                        <div class="position-box absolute">Absolute</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="effects" class="mb-2 animate delay-3">
+            <h2>Visual Effects</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Transforms</h3>
+                    <p>Rotate, scale, translate, skew</p>
+                    <div class="transform-example mt-1"></div>
+                </div>
+
+                <div class="card">
+                    <h3>Filters</h3>
+                    <p>Blur, grayscale, contrast, etc.</p>
+                    <img src="https://via.placeholder.com/300" alt="Placeholder" class="filter-example mt-1 rounded" width="100%">
+                </div>
+
+                <div class="card">
+                    <h3>Clip-path</h3>
+                    <p>Create custom shapes</p>
+                    <div class="clip-example mt-1"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="animation" class="mb-2">
+            <h2>Animation & Transition</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Transitions</h3>
+                    <p>Smooth property changes</p>
+                    <p>Hover over the cards on this page to see transitions in action</p>
+                </div>
+
+                <div class="card">
+                    <h3>Keyframes</h3>
+                    <p>Custom animation sequences</p>
+                    <div class="custom-prop mt-1"></div>
+                    <p class="text-center mt-1">This box uses CSS variables</p>
+                </div>
+
+                <div class="card">
+                    <h3>Transform Origin</h3>
+                    <p>Control transformation point</p>
+                    <div class="transform-example mt-1" style="transform-origin: top left;"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="responsive" class="mb-2">
+            <h2>Responsive Design</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Media Queries</h3>
+                    <p>Adapt to different screen sizes</p>
+                    <p>Resize your browser to see the layout change</p>
+                </div>
+
+                <div class="card">
+                    <h3>Viewport Units</h3>
+                    <p>vw, vh, vmin, vmax</p>
+                    <div style="width: 50vw; height: 10vh; background-color: var(--accent-color); margin: 1rem auto;"></div>
+                </div>
+
+                <div class="card">
+                    <h3>Dark Mode</h3>
+                    <p>Prefers-color-scheme</p>
+                    <p>Try enabling dark mode in your OS settings</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Mastering CSS. All rights reserved.</p>
+            <div class="flex justify-center mt-1">
+                <a href="#" class="btn btn-outline">GitHub</a>
+                <a href="#" class="btn btn-outline">Twitter</a>
+                <a href="#" class="btn btn-outline">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
